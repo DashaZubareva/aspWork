@@ -1,0 +1,6 @@
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\bin\Debug\QlinkTrainig.exe.config
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\bin\Debug\QlinkTrainig.exe
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\bin\Debug\QlinkTrainig.pdb
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\obj\Debug\QlinkTrainig.csprojResolveAssemblyReference.cache
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\obj\Debug\QlinkTrainig.exe
+D:\RepAspNet\Daria\QlinkTrainig\QlinkTrainig\obj\Debug\QlinkTrainig.pdb
