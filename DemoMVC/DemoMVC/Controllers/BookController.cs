@@ -26,11 +26,15 @@ namespace DemoMVC.Controllers
             HttpCookie bascket = Request.Cookies["bascket"];
             if (bascket == null)
             {
-                Response.Cookies["bascket"].Value = "Microsoft success";
-                Response.Cookies["bascket"].Expires = DateTime.Now.AddDays(1);
+                Response.Cookies["bascket"].Value = string.Empty;
+                Response.Cookies["bascket"].Expires = DateTime.Now.AddMinutes(10);
             }
         }
-
+        [HttpGet]
+        public ActionResult Bucket()
+        {
+            return View();
+        }
     [HttpPost]
         public ActionResult List(IList<Book> books)
         {

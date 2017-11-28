@@ -13,9 +13,14 @@
     <a href="#" id="refId" class="btn btn-primary">Искать</a>      
     </div>
 
+<div style="margin-bottom:20px; margin-left:250px; padding-bottom:12px;">
+    <span> Bucket  </span>    
+    <a href="#" id="BucketRefId" class="btn btn-primary">Корзина</a>
+</div>
+
 <div><table border="1" width="500">
     <tr>
-        <td colspan="3" align="center" style="font-weight:800">Book Name</td>
+        <td colspan="4" align="center" style="font-weight:800">Book Name</td>
     </tr>
        
     @foreach (Book book in Model)
@@ -25,9 +30,31 @@
             <td width="300">@Html.ActionLink("Edit", "EditBook", "Book", new { bookId= book.ID}, null)</td>
           <!--  <td width="300"> @Html.ActionLink("Delete", "DeleteBook", "Book", new { bookId = book.ID }, null)</td>-->
             <td width="300"><a href="#" class="delete-book" bookId="@book.ID">Delete</a></td>
+            <td width="300"><input type="button" onclick="addToBucket(this)" bookId="@book.ID" value="AddBucket"/></td>
         </tr>
     }
 </table>
+    <script>
+        document.cookie = "";
+        var cookie = "";
+
+       /* function addToBucket(el) {
+            var bookId = $(el).attr('bookId');
+            if (getCookie("bascket1") == '') {
+                cookie = "bascket1=";
+            } else {
+                cookie = cookie + getCookie("bascket1") + "," + bookId;
+            }
+            alert(cookie);
+            document.cookie = cookie;
+        }*/
+        function addToBucket(el) {
+            var $cookiesName = "bascket1";
+            var bookId = $(el).attr('bookId');
+            var previousVal = $.cookie($cookiesName);
+            $.cookie($cookiesName, previousVal + bookId + ",");
+        }
+    </script>
     </div>
 <div style="margin-top:20px;">
     @Html.ActionLink("Add", "AddBook", "Book", null)
@@ -40,8 +67,9 @@
 </div>
 <script>
     function readCookie() {
-        var cookie = getCookie("bascket");
-        alert(cookie);
+        //  var cookie = getCookie("bascket");
+        var x = document.cookie;
+        alert(x);
     }
     function getCookie(cname) {
         var name = cname + "=";
@@ -60,6 +88,13 @@
     function identitySearchVal() {      
         var path = "/Book/SearchBooks?val=";
         $("#refId").attr("href", path + $("#inputId").val())
+    }
+    function identitySearchValBucket() {
+        var path = "/Book/Bucket?val=";
+        $("#BucketRefId").attr("href", path + $("#inputBucket").val())
+    }
+    function setCookie() {
+        document.cookie = $("#inputId").val() + ";" + "path=/";
     }
   /*  $(".bookClazz").click(function(e){
         var bookId=$(this).attr('bookId');
