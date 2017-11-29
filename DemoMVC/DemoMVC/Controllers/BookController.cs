@@ -16,18 +16,18 @@ namespace DemoMVC.Controllers
         [HttpGet]
         public ActionResult List()
         {
-            SetCookieIFNotExist();
+           // SetCookieIFNotExist();
 
             return View(db.bookRepozitory.findAll());
         }
 
       private void SetCookieIFNotExist()
         {
-            HttpCookie bascket = Request.Cookies["bascket"];
+            HttpCookie bascket = Request.Cookies["bascket1"];
             if (bascket == null)
             {
-                Response.Cookies["bascket"].Value = string.Empty;
-                Response.Cookies["bascket"].Expires = DateTime.Now.AddMinutes(10);
+                Response.Cookies["bascket1"].Value = string.Empty;
+                Response.Cookies["bascket1"].Expires = DateTime.Now.AddMinutes(10);
             }
         }
         [HttpGet]
@@ -92,6 +92,18 @@ namespace DemoMVC.Controllers
                 
             }
 
+        }
+        [HttpPost]
+        public string DeleteBooks(string bookIds)
+        {
+            string [] IDs = bookIds.Split(',');
+            
+            for (int i=0; i< IDs.Length; i++)
+            {
+                bool isDeleted = db.bookRepozitory.delete((Int32.Parse(IDs[i])));
+               
+            }
+            return "1";
         }
         [HttpGet]
         public ActionResult AddBook()
