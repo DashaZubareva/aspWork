@@ -27,6 +27,8 @@
     {
         <tr>
             <td width="300" class="bookClazz" bookId="@book.ID">@book.BookName </td>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.Author </td>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.Price </td>
             <td width="300">@Html.ActionLink("Edit", "EditBook", "Book", new { bookId= book.ID}, null)</td>
           <!--  <td width="300"> @Html.ActionLink("Delete", "DeleteBook", "Book", new { bookId = book.ID }, null)</td>-->
             <td width="300"><a href="#" class="delete-book" bookId="@book.ID">Delete</a></td>

@@ -98,7 +98,7 @@ namespace DemoMVC.Controllers
         {
             string [] IDs = bookIds.Split(',');
             
-            for (int i=0; i< IDs.Length; i++)
+            for (int i=0; i< IDs.Length-1; i++)
             {
                 bool isDeleted = db.bookRepozitory.delete((Int32.Parse(IDs[i])));
                
@@ -138,7 +138,7 @@ namespace DemoMVC.Controllers
             {
                 IList<Book> findedBooks = db.bookRepozitory.searchBooks(val);
                 ViewBag.model = findedBooks;
-                return View("SearchBooks", findedBooks);
+                return View("List", findedBooks);
             }
         }
        
