@@ -15,7 +15,7 @@
 
 <div style="margin-bottom:20px; margin-left:250px; padding-bottom:12px;">
     <span> Bucket  </span>    
-    <a href="#" id="BucketRefId" class="btn btn-primary">Корзина</a>
+    <a href="#" id="delete-books" class="btn btn-primary">Корзина</a>
 </div>
 
 <div><table border="1" width="500">
@@ -27,6 +27,8 @@
     {
         <tr>
             <td width="300" class="bookClazz" bookId="@book.ID">@book.BookName </td>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.Author </td>
+            <td width="300" class="bookClazz" bookId="@book.ID">@book.Price </td>
             <td width="300">@Html.ActionLink("Edit", "EditBook", "Book", new { bookId= book.ID}, null)</td>
           <!--  <td width="300"> @Html.ActionLink("Delete", "DeleteBook", "Book", new { bookId = book.ID }, null)</td>-->
             <td width="300"><a href="#" class="delete-book" bookId="@book.ID">Delete</a></td>
@@ -36,23 +38,22 @@
 </table>
     <script>
         document.cookie = "";
-        var cookie = "";
+        var cookie = "bascket1=";
 
-       /* function addToBucket(el) {
-            var bookId = $(el).attr('bookId');
-            if (getCookie("bascket1") == '') {
-                cookie = "bascket1=";
-            } else {
-                cookie = cookie + getCookie("bascket1") + "," + bookId;
-            }
-            alert(cookie);
+        function addToBucket(el) {           
+            var bookId = $(el).attr('bookId');        
+            cookie = cookie + bookId + ",";
+            alert(getCookie("bascket1"));
             document.cookie = cookie;
-        }*/
-        function addToBucket(el) {
+        }
+        /*function addToBucket(el) {
             var $cookiesName = "bascket1";
             var bookId = $(el).attr('bookId');
             var previousVal = $.cookie($cookiesName);
             $.cookie($cookiesName, previousVal + bookId + ",");
+        }*/
+        function setCookie(name, value) {
+            document.cookie = name + "=" + escape(value);             
         }
     </script>
     </div>
@@ -115,9 +116,27 @@
                     } break;
                     case '2': alert("Book has been not deleted!!"); break;
                     default: alert("bookId is incorrect"); break;
-
-                }           
-              
+                }
+            }
+        })
+    })
+    $("#delete-books").click(function (e) {
+        var IDs = getCookie("bascket1");
+        console.log(IDs);
+        $.ajax({
+            type: "POST",
+            url: "/Book/DeleteBooks",
+            data: { bookIds: IDs },
+            async: true,
+            success: function (rezult) {
+                switch (rezult) {
+                    case '1': {
+                        alert("Book has been succesfully deleted!");
+                        location.reload();
+                    } break;
+                    case '2': alert("Book has been not deleted!!"); break;
+                    default: alert("bookId is incorrect"); break;
+                }
             }
         })
     })
